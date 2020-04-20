@@ -1,0 +1,82 @@
+<mvc:View xmlns:core="sap.ui.core" xmlns:mvc="sap.ui.core.mvc" xmlns="sap.m"
+	controllerName="ns.QTSurvey.controller.Main" xmlns:html="http://www.w3.org/1999/xhtml">
+	<Page
+		showFooter="true"
+		floatingFooter="true"
+		titleAlignment="Center"
+		title="{i18n>mainPageTitle}">
+		<subHeader>
+			<Toolbar>
+				<SearchField
+					placeholder="{i18n>filterEvents}"
+					search="onFilterTaskSearch" />
+			</Toolbar>
+		</subHeader>
+		<content>
+			<PullToRefresh
+				id="pullToRefresh"
+				visible="{device>/isTouch}"
+				refresh="onEventListRefresh" />
+			<List
+				id="eventList"
+				noDataText="{i18n>noEventToDisplay}"
+				sticky="HeaderToolbar"
+				growing="true"
+				growingScrollToLoad="true"
+				items="{
+					path: 'oDataModel>/EventSet',
+					sorter: {
+						path: 'eventDate',
+						descending: true
+					}
+				}">
+				<!--<headerToolbar>-->
+				<!--	<Toolbar>-->
+				<!--		<SegmentedButton-->
+				<!--			width="100%"-->
+				<!--			selectedKey="inProgress"-->
+				<!--			selectionChange="onSegmentedButtonSelectionChange">-->
+				<!--			<items>-->
+				<!--				<SegmentedButtonItem-->
+				<!--					text="{i18n>inProgress}"-->
+				<!--					key="inProgress"/>-->
+				<!--				<SegmentedButtonItem-->
+				<!--					text="{i18n>completed}"-->
+				<!--					key="completed"/>-->
+				<!--				<SegmentedButtonItem-->
+				<!--					text="{i18n>all}"-->
+				<!--					key="all"/>-->
+				<!--			</items>-->
+				<!--		</SegmentedButton>-->
+				<!--	</Toolbar>-->
+				<!--</headerToolbar>-->
+				<ObjectListItem
+					class="eventObjectListItem"
+					intro="{i18n>eventId}: {oDataModel>EventID}"
+					title="{oDataModel>customer}"
+					type="Navigation"
+					press="onEventListItemPress">
+					<ObjectAttribute
+						title="{i18n>eventDate}"
+						text="{
+							path: 'oDataModel>eventDate',
+							type: 'sap.ui.model.type.DateTime',
+							formatOptions: {
+								style: 'short'
+							}
+						}"/>
+				</ObjectListItem>
+			</List>
+		</content>
+		<footer>
+			<Toolbar>
+				<ToolbarSpacer />
+				<Button
+					icon="sap-icon://add"
+					type="Emphasized"
+					text="{i18n>newEvent}"
+					press="onNewEventButtonPress"/>
+			</Toolbar>
+		</footer>
+	</Page>
+</mvc:View>

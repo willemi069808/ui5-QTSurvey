@@ -1,0 +1,9 @@
+<mvc:View controllerName="ns.QTSurvey.controller.App" xmlns:mvc="sap.ui.core.mvc"
+	displayBlock="true"
+	height="100%"
+	xmlns="sap.f">
+	<FlexibleColumnLayout
+		id="idAppControl"
+		layout="{/layout}"
+		backgroundDesign="Solid"/>
+</mvc:View>

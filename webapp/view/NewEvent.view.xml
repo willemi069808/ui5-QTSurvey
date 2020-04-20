@@ -1,0 +1,113 @@
+<mvc:View
+	xmlns:core="sap.ui.core"
+	xmlns:mvc="sap.ui.core.mvc"
+	xmlns="sap.m"
+	xmlns:l="sap.ui.layout"
+	controllerName="ns.QTSurvey.controller.NewEvent">
+	<Page
+		titleAlignment="Center"
+		showNavButton="true"
+		navButtonPress="onNavBack"
+		title="{i18n>newEventPageTitle}">
+		<content>
+			<l:Grid
+				vSpacing="0"
+				defaultSpan="XL4 L4 M6 S12">
+				<FlexBox
+					height="48px"
+					alignItems="Center"
+					justifyContent="{= ${device>/system/phone} ? 'Start' : 'End' }">
+					<Label text="{i18n>user}" required="true"/>
+					<layoutData>
+						<l:GridData
+							linebreak="true"
+							span="XL4 L4 M6 S12"
+							indent="XL2 L2 M0 S0"/>
+					</layoutData>
+				</FlexBox>
+				<Input
+					placeholder="{i18n>enterUserName}"
+					value="{/new/user} ({/new/userName})"
+					editable="false"/>
+
+				<FlexBox
+					height="48px"
+					alignItems="Center"
+					justifyContent="{= ${device>/system/phone} ? 'Start' : 'End' }">
+					<Label text="{i18n>customer}" required="true"/>
+					<layoutData>
+						<l:GridData
+							linebreak="true"
+							span="XL4 L4 M6 S12"
+							indent="XL2 L2 M0 S0"/>
+					</layoutData>
+				</FlexBox>
+				<Input
+					editable="{= !${/showQRCode} }"
+					placeholder="{i18n>enterCustomer}"
+					value="{/new/customer}"/>
+
+				<FlexBox
+					height="48px"
+					alignItems="Center"
+					justifyContent="{= ${device>/system/phone} ? 'Start' : 'End' }">
+					<Label text="{i18n>eventDate}" required="true"/>
+					<layoutData>
+						<l:GridData
+							linebreak="true"
+							span="XL4 L4 M6 S12"
+							indent="XL2 L2 M0 S0"/>
+					</layoutData>
+				</FlexBox>
+				<DateTimePicker
+					class="hideSecondsColumn"
+					minutesStep="15"
+					editable="{= !${/showQRCode} }"
+					placeholder="{i18n>enterEventDate}"
+					dateValue="{/new/eventDate}"/>
+
+				<Button
+					class="sapUiSmallMarginTop"
+					text="{i18n>showQRCode}"
+					visible="{= !${/showQRCode} }"
+					width="100%"
+					press="onCreateEventAndShowQRCodeButtonPress">
+					<layoutData>
+						<l:GridData
+							span="XL8 L8 M12 S12"
+							indent="XL2 L2 M0 S0"/>
+					</layoutData>
+				</Button>
+
+				<FlexBox
+					class="sapUiSmallMarginTop"
+					visible="{/generatingQRCode}"
+					height="1.4em"
+					alignItems="Center"
+					justifyContent="Center">
+					<BusyIndicator
+						size="1.4em" />
+					<layoutData>
+						<l:GridData
+							linebreak="true"
+							span="XL12 L12 M12 S12"/>
+					</layoutData>
+				</FlexBox>
+
+				<FlexBox
+					class="sapUiMediumMarginTop"
+					visible="{/showQRCode}"
+					height="250px"
+					alignItems="Center"
+					justifyContent="Center">
+					<core:HTML id="qrcode" content='&lt;div id="qrcode"/&gt;'/>
+					<layoutData>
+						<l:GridData
+							span="XL12 L12 M12 S12"/>
+					</layoutData>
+				</FlexBox>
+
+			</l:Grid>
+		</content>
+	</Page>
+</mvc:View>

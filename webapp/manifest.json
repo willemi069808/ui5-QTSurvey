@@ -8,7 +8,28 @@
       "version": "1.0.0"
     },
     "title": "{{appTitle}}",
-    "description": "{{appDescription}}"
+    "description": "{{appDescription}}",
+    "sourceTemplate": {
+			"id": "ui5template.basicSAPUI5ApplicationProject",
+			"version": "1.40.12"
+		},
+    "dataSources": {
+			"init_data_alias": {
+				"uri": "model/init_data.json",
+				"type": "JSON"
+			},
+			"params_alias": {
+				"uri": "/hanadb02_PRESALES_QUALTRICS_USER/presales_qualtrics_survey_dev/services/config_params.xsjs",
+				"type": "JSON"
+			},
+			"main_service.xsodata": {
+				"uri": "/hanadb02_PRESALES_QUALTRICS_USER/presales_qualtrics_survey_dev/services/main_service.xsodata",
+				"type": "OData",
+				"settings": {
+					"localUri": "localService/metadata.xml"
+				}
+			}
+		}
   },
   "sap.ui": {
     "technology": "UI5",
@@ -27,14 +48,15 @@
     }
   },
   "sap.ui5": {
+    "flexEnabled": false,
     "rootView": {
-      "viewName": "ns.QTSurvey.view.MainView",
+      "viewName": "ns.QTSurvey.view.App",
       "type": "XML",
       "async": true,
-      "id": "idAppControl"
+      "id": "App"
     },
     "dependencies": {
-      "minUI5Version": "1.60.0",
+      "minUI5Version": "1.65.6",
       "libs": {
         "sap.ui.core": {},
         "sap.m": {},
@@ -51,19 +73,46 @@
         "settings": {
           "bundleName": "ns.QTSurvey.i18n.i18n"
         }
-      }
+      },
+      "": {
+				"type": "sap.ui.model.json.JSONModel",
+				"dataSource": "init_data_alias"
+			},
+			"params": {
+				"type": "sap.ui.model.json.JSONModel",
+				"dataSource": "params_alias"
+			},
+			"oDataModel": {
+				"type": "sap.ui.model.odata.v2.ODataModel",
+				"settings": {
+					"defaultOperationMode": "Server",
+					"defaultBindingMode": "OneWay",
+					"defaultCountMode": "Request"
+				},
+				"dataSource": "main_service.xsodata",
+				"preload": true
+			}
     },
     "resources": {
       "css": [
         {
           "uri": "css/style.css"
         }
-      ]
+      ],
+      "js": [
+				{
+					"uri": "util/qrcode.js"
+				},
+				{
+					"uri": "util/download.js"
+				}
+			]
     },
     "routing": {
       "config": {
         "routerClass": "sap.m.routing.Router",
         "viewType": "XML",
+        "clearControlAggregation": true,
         "viewPath": "ns.QTSurvey.view",
         "controlId": "idAppControl",
         "controlAggregation": "pages",
@@ -71,19 +120,55 @@
       },
       "routes": [
         {
-          "name": "RouteMainView",
-          "pattern": "RouteMainView",
-          "target": [
-            "TargetMainView"
-          ]
-        }
+					"name": "Main",
+					"pattern": "",
+					"titleTarget": "",
+					"greedy": false,
+					"target": [
+						"Main"
+					]
+				},
+				{
+					"name": "NewEvent",
+					"pattern": "new",
+					"titleTarget": "",
+					"greedy": false,
+					"target": [
+						"NewEvent"
+					]
+				},
+				{
+					"name": "EventDetails",
+					"pattern": "details/{path}",
+					"titleTarget": "",
+					"greedy": false,
+					"target": [
+						"Main",
+						"EventDetails"
+					]
+				}
       ],
       "targets": {
-        "TargetMainView": {
-          "viewType": "XML",
-          "viewLevel": 1,
-          "viewName": "MainView"
-        }
+        "Main": {
+					"viewType": "XML",
+					"viewName": "Main",
+					"viewLevel": 1,
+					"controlAggregation": "beginColumnPages",
+					"clearControlAggregation": true
+				},
+				"NewEvent": {
+					"viewType": "XML",
+					"viewName": "NewEvent",
+					"viewLevel": 2,
+					"controlAggregation": "beginColumnPages",
+					"clearControlAggregation": true
+				},
+				"EventDetails": {
+					"viewType": "XML",
+					"viewName": "EventDetails",
+					"viewLevel": 2,
+					"controlAggregation": "midColumnPages"
+				}
       }
     }
   }

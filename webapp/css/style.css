@@ -1,1 +1,8 @@
 /* Enter your custom styles here */
+.largerBusyIndicator{
+	width: 100%;
+}
+
+.sapMTimePickerContainer .sapMTPColumn:nth-child(4) {
+    display: none;
+}

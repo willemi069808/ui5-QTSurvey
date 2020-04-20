@@ -1,0 +1,133 @@
+<mvc:View
+	xmlns="sap.m"
+	xmlns:core="sap.ui.core"
+	xmlns:f="sap.f"
+	xmlns:form="sap.ui.layout.form"
+	xmlns:l="sap.ui.layout"
+	xmlns:uxap="sap.uxap"
+	xmlns:html="http://www.w3.org/1999/xhtml"
+	xmlns:mvc="sap.ui.core.mvc"
+	controllerName="ns.QTSurvey.controller.EventDetails" >
+	<uxap:ObjectPageLayout
+		showFooter="true"
+		alwaysShowContentHeader="false"
+		preserveHeaderStateOnScroll="false"
+		headerContentPinnable="true"
+		isChildPage="true"
+		upperCaseAnchorBar="false"
+		enableLazyLoading="true"
+		useIconTabBar="false"
+		showTitleInHeaderContent="true">
+		<uxap:headerTitle>
+			<uxap:ObjectPageDynamicHeaderTitle>
+				<uxap:expandedHeading>
+					<Title
+						class="sapUiSmallMarginBeginEnd"
+						text="{i18n>eventDetails} @ {oDataModel>customer}"
+						wrapping="true" />
+				</uxap:expandedHeading>
+
+				<uxap:snappedHeading>
+					<l:Grid
+						hSpacing="0"
+						vSpacing="0"
+						width="100%">
+						<Title
+							class="sapUiSmallMarginBeginEnd"
+							width="100%"
+							text="{i18n>eventDetails}: {oDataModel>customer}"
+							level="H4"
+							titleStyle="H4"
+							wrapping="true" >
+							<layoutData>
+								<l:GridData
+									span="XL10 L10 M10 S10"/>
+							</layoutData>
+						</Title>
+					</l:Grid>
+				</uxap:snappedHeading>
+
+				<uxap:navigationActions>
+					<OverflowToolbarButton
+						type="Transparent"
+						icon="sap-icon://decline"
+						press="onNavBack"/>
+				</uxap:navigationActions>
+
+			</uxap:ObjectPageDynamicHeaderTitle>
+		</uxap:headerTitle>
+
+		<uxap:headerContent>
+			<ObjectHeader
+				class="sapUiResponsivePadding--header"
+				responsive="true"
+				title="{i18n>eventDetails} @ {oDataModel>customer}"
+				intro="{oDataModel>EventID}"
+				backgroundDesign="Translucent" >
+				<ObjectAttribute
+					title="{i18n>eventDate}"
+					text="{
+						path: 'oDataModel>eventDate',
+						type: 'sap.ui.model.type.DateTime',
+						formatOptions: {
+							style: 'short'
+						}
+					}"/>
+			</ObjectHeader>
+
+		</uxap:headerContent>
+
+		<uxap:sections>
+			<uxap:ObjectPageSection title="{i18n>qualtricsSurveyQRCode}">
+				<uxap:subSections>
+					<uxap:ObjectPageSubSection>
+						<uxap:blocks>
+							<VBox
+								width="100%">
+								<MessageStrip
+									text="{i18n>selectYourSlideDeckBackground}"
+									showIcon="true"
+									showCloseButton="false"
+									class="sapUiMediumMarginBottom">
+								</MessageStrip>
+								<FlexBox
+									height="50px"
+									width="100%"
+									alignItems="Center"
+									justifyContent="Center">
+									<SegmentedButton
+										id="slideBackgroundSB"
+										width="100%"
+										selectedKey="black"
+										selectionChange="onSlidesBackgroundColorSelectionChange">
+										<items>
+											<SegmentedButtonItem text="{i18n>blackPresentation}" key="black" width="auto"/>
+											<SegmentedButtonItem text="{i18n>whitePresentation}" key="white" width="auto"/>
+										</items>
+									</SegmentedButton>
+								</FlexBox>
+								<FlexBox
+									height="300px"
+									width="100%"
+									alignItems="Center"
+									justifyContent="Center">
+									<core:HTML id="event_qrcode" content='&lt;div id="event_qrcode"/&gt;'/>
+								</FlexBox>
+
+							</VBox>
+						</uxap:blocks>
+					</uxap:ObjectPageSubSection>
+				</uxap:subSections>
+			</uxap:ObjectPageSection>
+		</uxap:sections>
+		<uxap:footer>
+			<Toolbar>
+				<ToolbarSpacer />
+				<Button
+					text="{i18n>downloadQRCode}"
+					icon="sap-icon://download"
+					press="onQRCodeDownloadButtonPress" />
+			</Toolbar>
+		</uxap:footer>
+	</uxap:ObjectPageLayout>
+</mvc:View>
