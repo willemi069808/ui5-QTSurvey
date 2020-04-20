@@ -1,0 +1,8 @@
+{
+  "welcomeFile": "nsQTSurvey/",
+  "authenticationMethod": "route",
+  "logout": {
+    "logoutEndpoint": "/do/logout"
+  },
+  "routes": []
+}

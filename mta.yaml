@@ -1,0 +1,52 @@
+ID: QTSurvey
+_schema-version: 3.2.0
+description: Enter description here
+version: 0.0.1
+parameters:
+  enable-parallel-deployments: true
+
+modules:
+ - name: QTSurvey
+   type: nodejs
+   path: approuter
+   parameters:
+      disk-quota: 512M
+      memory: 512M
+   requires:
+      - name: QTSurvey_destination
+      - name: QTSurvey_uaa
+      - name: QTSurvey_html5_repo_runtime
+ - name: QTSurvey_deployer
+   type: com.sap.html5.application-content
+   path: deployer
+   requires:
+     - name: QTSurvey_html5_repo_host
+   build-parameters:
+     builder: custom
+     commands:
+       - npm run build:ui --prefix ..
+
+resources:
+ - name: QTSurvey_destination
+   type: org.cloudfoundry.managed-service
+   parameters:
+      service-plan: lite
+      service: destination
+ - name: QTSurvey_uaa
+   type: org.cloudfoundry.managed-service
+   parameters:
+     path: ./xs-security.json
+     service-plan: application
+     service: xsuaa
+ - name: QTSurvey_html5_repo_runtime
+   type: org.cloudfoundry.managed-service
+   parameters:
+      service-plan: app-runtime
+      service: html5-apps-repo
+ - name: QTSurvey_html5_repo_host
+   type: org.cloudfoundry.managed-service
+   parameters:
+      service-plan: app-host
+      service: html5-apps-repo
+      config:
+        sizeLimit: 5
