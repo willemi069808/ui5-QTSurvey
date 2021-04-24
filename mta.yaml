@@ -10,8 +10,7 @@ modules:
    type: nodejs
    path: approuter
    parameters:
-      disk-quota: 512M
-      memory: 512M
+      memory: 64M
    requires:
       - name: QTSurvey_destination
       - name: QTSurvey_uaa
@@ -25,6 +24,14 @@ modules:
      builder: custom
      commands:
        - npm run build:ui --prefix ..
+ - name: QTSurvey_proxy
+   type: nodejs
+   path: proxy
+   parameters:
+      memory: 64M
+   requires:
+      - name: QTSurvey_destination
+      - name: QTSurvey_uaa
 
 resources:
  - name: QTSurvey_destination

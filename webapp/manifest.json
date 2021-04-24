@@ -18,12 +18,8 @@
 				"uri": "model/init_data.json",
 				"type": "JSON"
 			},
-			"params_alias": {
-				"uri": "/hanadb02_PRESALES_QUALTRICS_USER/presales_qualtrics_survey_dev/services/config_params.xsjs",
-				"type": "JSON"
-			},
 			"main_service.xsodata": {
-				"uri": "/hanadb02_PRESALES_QUALTRICS_USER/presales_qualtrics_survey_dev/services/main_service.xsodata",
+				"uri": "/hanadb/presales_survey_dev/services/presales_survey.xsodata",
 				"type": "OData",
 				"settings": {
 					"localUri": "localService/metadata.xml"
@@ -77,10 +73,6 @@
       "": {
 				"type": "sap.ui.model.json.JSONModel",
 				"dataSource": "init_data_alias"
-			},
-			"params": {
-				"type": "sap.ui.model.json.JSONModel",
-				"dataSource": "params_alias"
 			},
 			"oDataModel": {
 				"type": "sap.ui.model.odata.v2.ODataModel",

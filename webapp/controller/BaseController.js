@@ -31,7 +31,7 @@ sap.ui.define([
 
 		onInit: function () {
 			if (this.__targetName !== undefined && this.__targetName !== null) {
-				var targets = typeof this.__targetName === 'string' ? [this.__targetName] : this.__targetName;
+				var targets = typeof this.__targetName === "string" ? [this.__targetName] : this.__targetName;
 				for (var i = 0; i < targets.length; i++) {
 					var oRoute = this.getRouter().getRoute(targets[i]);
 					if (oRoute){
@@ -53,7 +53,7 @@ sap.ui.define([
 						sInitials = oData.firstName[0].toUpperCase() + oData.lastName[0].toUpperCase();
 
 					oData.initials = sInitials;
-					oModel.setProperty("/user",oData);
+					oModel.setProperty("/user", oData);
 				}.bind(this)
 			)
 			.catch(
@@ -248,8 +248,8 @@ sap.ui.define([
 		 */
 
 		_generateUuidv4: function () {
-		  return 'xxxxxxxxxxxx4xxxyxxxxxxxxxxxxxxx'.replace(/[xy]/g, function(c) {
-		    var r = Math.random() * 16 | 0, v = c == 'x' ? r : (r & 0x3 | 0x8);
+		  return "xxxxxxxxxxxx4xxxyxxxxxxxxxxxxxxx".replace(/[xy]/g, function(c) {
+		    var r = Math.random() * 16 | 0, v = c == "x" ? r : (r & 0x3 | 0x8);
 		    return v.toString(16);
 		  });
 		},

@@ -4,5 +4,15 @@
   "logout": {
     "logoutEndpoint": "/do/logout"
   },
-  "routes": []
+  "routes": [{
+    "source": "^(.*)",
+    "target": "$1",
+    "authenticationType": "xsuaa",
+    "service": "html5-apps-repo-rt"
+  },{
+    "source": "^/hanadb/(.*)^",
+    "target": "$1",
+    "destination": "HANA_DEST",
+    "authenticationType": "none"
+  }]
 }

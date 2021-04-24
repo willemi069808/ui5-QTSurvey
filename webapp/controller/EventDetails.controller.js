@@ -69,7 +69,8 @@ sap.ui.define([
 				case "white":
 					this.__qrCode._htOption.colorLight="#ffffff";
 					this.__qrCode._htOption.colorDark="#000000";
-				break;
+        break;
+        default: break;
 			}
 
 			this.__qrCode.clear();

@@ -1,0 +1,19 @@
+{
+  "name": "qualtrics-survey",
+  "version": "1.0.0",
+  "description": "Qualtrics middleware to communicate with API",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js"
+  },
+  "author": "SAP Presales Italy",
+  "license": "ISC",
+  "dependencies": {
+    "axios": "^0.19.2",
+    "body-parser": "^1.19.0",
+    "dotenv": "^8.2.0",
+    "express": "^4.17.1",
+    "http": "0.0.0",
+    "morgan": "^1.9.1"
+  }
+}

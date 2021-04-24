@@ -40,7 +40,7 @@ sap.ui.define([
 						}
 					);
 			}
-			else{
+			else {
 				this._eraseNewEvent();
 			}
 		},

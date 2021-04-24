@@ -17,7 +17,7 @@ sap.ui.define([
 		onRouteMatched: function(oEvent){
 			var oModel = this.getComponentModel(),
 				oUser = oModel.getProperty("/user"),
-				sLayout = (oModel.getProperty("/detailsLoaded") ? 'TwoColumnsMidExpanded' : 'OneColumn');
+				sLayout = (oModel.getProperty("/detailsLoaded") ? "TwoColumnsMidExpanded" : "OneColumn");
 
 			oModel.setProperty("/layout", sLayout);
 

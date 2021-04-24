@@ -1,0 +1,6 @@
+---
+    applications:
+    - name: qualtrics-proxy-nodejs-dev
+      path: .
+      buildpack: nodejs_buildpack
+      memory: 128M

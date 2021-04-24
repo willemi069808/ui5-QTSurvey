@@ -5,8 +5,8 @@
     "node": "12.x.x"
   },
   "scripts": {
-    "start": "node node_modules/@sap/approuter/approuter.js",
-    "local": "node -r dotenv/config index.js"
+    "start": "node app.js",
+    "local": "node -r dotenv/config app.js"
   },
   "dependencies": {
     "@sap/approuter": "^6.8.2"
